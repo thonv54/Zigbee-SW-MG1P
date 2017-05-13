@@ -20272,19 +20272,6 @@ bool emberAfPluginNetworkFindJoinCallback(EmberZigbeeNetwork *networkFound,
 /** @} END Network Find Plugin Callbacks */
 
 
-/** @name OTA Simple Storage EEPROM Driver Plugin Callbacks */
-// @{
-
-/** @brief Erase Complete
- *
- * This is called when an EEPROM erase operation has completed.
- *
- * @param success The result of the erase operation. Ver.: always
- */
-void emberAfPluginOtaStorageSimpleEepromEraseCompleteCallback(bool success);
-/** @} END OTA Simple Storage EEPROM Driver Plugin Callbacks */
-
-
 /** @name Reporting Plugin Callbacks */
 // @{
 
@@ -20303,6 +20290,19 @@ void emberAfPluginOtaStorageSimpleEepromEraseCompleteCallback(bool success);
  */
 EmberAfStatus emberAfPluginReportingConfiguredCallback(const EmberAfPluginReportingEntry *entry);
 /** @} END Reporting Plugin Callbacks */
+
+
+/** @name OTA Simple Storage EEPROM Driver Plugin Callbacks */
+// @{
+
+/** @brief Erase Complete
+ *
+ * This is called when an EEPROM erase operation has completed.
+ *
+ * @param success The result of the erase operation. Ver.: always
+ */
+void emberAfPluginOtaStorageSimpleEepromEraseCompleteCallback(bool success);
+/** @} END OTA Simple Storage EEPROM Driver Plugin Callbacks */
 
 
 /** @} END addtogroup */

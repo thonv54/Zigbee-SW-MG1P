@@ -187,7 +187,7 @@
           <name>CCDefines</name>
         <state>DEBUG_OFF</state>
 
-          <state>NULL_BTL</state>
+          <state>APP_BTL</state>
           <state>CORTEXM3</state>
           <state>CORTEXM3_EFR32</state>
           <state>CORTEXM3_EFR32_MICRO</state>
@@ -379,6 +379,7 @@
           <state>$PROJ_DIR$\..\..\..\platform\base\hal\..\..\radio\rail_lib\chip\efr32\rf\rfprotocol\ieee802154\cortex</state>
           <state>$PROJ_DIR$\..\..\..\hardware\kit\common\bsp</state>
           <state>$PROJ_DIR$\..\..\..\hardware\kit\EFR32MG1_BRD4300B\config</state>
+          <state>$PROJ_DIR$\..\..\..\platform\bootloader</state>
           <state>$PROJ_DIR$\ZigbeeUtility</state>
           <state>$PROJ_DIR$\AppEvent</state>
           <state>$PROJ_DIR$\HalDelay</state>
@@ -560,7 +561,7 @@
           <name>ADefines</name>
         <state>DEBUG_OFF</state>
 
-          <state>NULL_BTL</state>
+          <state>APP_BTL</state>
           <state>CORTEXM3</state>
           <state>CORTEXM3_EFM32_MICRO</state>
           <state>CORTEXM3_EFR32_MICRO</state>
@@ -718,6 +719,7 @@
           <state>$PROJ_DIR$\..\..\..\platform\base\hal\..\..\radio\rail_lib\chip\efr32\rf\rfprotocol\ieee802154\cortex</state>
           <state>$PROJ_DIR$\..\..\..\hardware\kit\common\bsp</state>
           <state>$PROJ_DIR$\..\..\..\hardware\kit\EFR32MG1_BRD4300B\config</state>
+          <state>$PROJ_DIR$\..\..\..\platform\bootloader</state>
           <state>$PROJ_DIR$\ZigbeeUtility</state>
           <state>$PROJ_DIR$\AppEvent</state>
           <state>$PROJ_DIR$\HalDelay</state>
@@ -854,7 +856,7 @@
           <name>IlinkConfigDefines</name>
           <state>FLASH_SIZE=262144</state>
           <state>RAM_SIZE=32768</state>
-          <state>NULL_BTL=1</state>
+          <state>APP_BTL=1</state>
 
         </option>
         <option>
@@ -1247,6 +1249,10 @@
 <file><name>$PROJ_DIR$/../../../app\builder\ZigbeeSW\Uart_V2\Uart_Receiver.c</name></file>
 <file><name>$PROJ_DIR$/../../../app\builder\ZigbeeSW\Uart_V2\Uart_Transmitter.c</name></file>
 <file><name>$PROJ_DIR$/../../../app\builder\ZigbeeSW\ZigbeeUtility\ZigbeeUtility.c</name></file>
+<file><name>$PROJ_DIR$/../../../platform\base\hal\micro\cortexm3\efm32\bootloader-interface-app.c</name></file>
+<file><name>$PROJ_DIR$/../../../platform\base\hal\micro\cortexm3\efm32\bootloader-interface.c</name></file>
+<file><name>$PROJ_DIR$/../../../platform\bootloader\api\btl_interface.c</name></file>
+<file><name>$PROJ_DIR$/../../../platform\bootloader\api\btl_interface_storage.c</name></file>
 
 
   <file><name>$PROJ_DIR$/../../../protocol\zigbee_5.9\app\framework\plugin\eeprom\eeprom.c</name></file>

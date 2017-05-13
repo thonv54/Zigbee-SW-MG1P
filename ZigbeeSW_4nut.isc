@@ -328,7 +328,7 @@ PATH(STACK_RELATIVE):app/builder/ZigbeeSW/Uart_V2
 PATH(STACK_RELATIVE):app/builder/ZigbeeSW/CommonLed
 PATH(STACK_RELATIVE):app/builder/ZigbeeSW/CommonButton
 PATH(STACK_RELATIVE):app/builder/ZigbeeSW/Com
-PATH(STACK_RELATIVE):app/builder/ZigbeeSW/SW1_config
+PATH(STACK_RELATIVE):app/builder/ZigbeeSW/SW4_config
 }
 {setupId:boardHeader
 efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]=BOARD,efr32/brd4300b,,
@@ -547,7 +547,7 @@ appPlugin:ezmode-commissioning,true
 
 appPlugin:find-and-bind-initiator,false
 
-appPlugin:find-and-bind-target,true
+appPlugin:find-and-bind-target,false
 
 appPlugin:form-and-join,true
 
@@ -983,4 +983,12 @@ AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]
 AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_BINDING_TABLE_SIZE,16
 
 AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_REPORTING_TABLE_SIZE,8
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_OTA_STORAGE_SIMPLE_EEPROM_STORAGE_END,262144
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_OTA_CLIENT_QUERY_DELAY_MINUTES,30
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_OTA_CLIENT_QUERY_ERROR_THRESHOLD,10
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_OTA_CLIENT_DOWNLOAD_DELAY_MS,1000
 

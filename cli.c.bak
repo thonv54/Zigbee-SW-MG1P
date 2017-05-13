@@ -18,8 +18,20 @@ void emAfCliSendCommand(void);
 void emAfCliTimesyncCommand(void);
 void emAfCliVersionCommand(void);
 void emAfCliWriteCommand(void);
+void emAfEepromDataPrintCommand(void);
+void emAfEepromInfoCommand(void);
+void emAfEepromStatusCommand(void);
 void emAfGroupsServerCliClear(void);
 void emAfGroupsServerCliPrint(void);
+void emAfOtaClientPrintState(void);
+void emAfOtaImageDelete(void);
+void emAfOtaPrintAllImages(void);
+void emAfOtaReloadStorageDevice(void);
+void emAfOtaStorageDataPrint(void);
+void emAfOtaStorageInfoPrint(void);
+#if defined(EMBER_AF_PLUGIN_OTA_STORAGE_SIMPLE_EEPROM) && !defined(EMBER_AF_PLUGIN_OTA_STORAGE_SIMPLE_EEPROM_READ_MODIFY_WRITE_SUPPORT)
+void emAfOtaWipeStorageDevice(void);
+#endif
 void emAfPluginIdentifyCliPrint(void);
 void emAfPluginReportingCliAdd(void);
 void emAfPluginReportingCliClear(void);
@@ -28,6 +40,7 @@ void emAfPluginReportingCliPrint(void);
 void emAfPluginReportingCliRemove(void);
 void emAfPluginScenesServerClear(void);
 void emAfPluginScenesServerPrintInfo(void);
+void emAfSendImageBlockRequestTest(void);
 void emberAfPluginEzModeCommissioningClientCommand(void);
 void emberAfPluginEzModeCommissioningServerCommand(void);
 void emberAfPluginFindAndBindTargetStartCommand(void);
@@ -73,12 +86,21 @@ void optionLinkCommand(void);
 void optionPrintRxCommand(void);
 void optionRegisterCommand(void);
 void optionSecurityAllowTrustCenterRejoin(void);
+void otaCliBootload(void);
+void otaCliVerify(void);
+void otaPrintClientInfo(void);
+void otaSendUpgradeRequest(void);
+void otaStartClientCommand(void);
+void otaStopClientCommand(void);
 void printAllLibraryStatus(void);
+void printBootloaderInfoCommand(void);
 void printEvents(void);
 void printOffCommand(void);
 void printOnCommand(void);
 void printTimeCommand(void);
 void resetCommand(void);
+void setPageRequest(void);
+void setPausePercentage(void);
 void zclGlobalCommandDiscoveryCommand(void);
 void zclGlobalDirectionCommand(void);
 void zclGlobalDiscoverCommand(void);
@@ -586,6 +608,72 @@ EmberCommandEntry emberCommandTablePluginReportingCommands[] = {
   emberCommandEntryTerminator()
 };
 
+EmberCommandEntry emberCommandTablePluginOtaStorageEepromCommands[] = {
+#if defined(EMBER_AF_PLUGIN_OTA_STORAGE_SIMPLE_EEPROM) && !defined(EMBER_AF_PLUGIN_OTA_STORAGE_SIMPLE_EEPROM_READ_MODIFY_WRITE_SUPPORT)
+  emberCommandEntryActionWithDetails("wipe", emAfOtaWipeStorageDevice, "", "Wipes all data in the storage device.", NULL),
+#endif
+  emberCommandEntryTerminator()
+};
+
+PGM_P PGM emberCommandTablePluginOtaStorageCommonDataPrintCommandArguments[] = {
+  "The index of the image to print its data.",
+  "The offset into the OTA image that will be printed.",
+  NULL
+};
+
+PGM_P PGM emberCommandTablePluginOtaStorageCommonDeleteCommandArguments[] = {
+  "The index at which to begin bootloading the image",
+  NULL
+};
+
+EmberCommandEntry emberCommandTablePluginOtaStorageCommonCommands[] = {
+  emberCommandEntryActionWithDetails("data-print", emAfOtaStorageDataPrint, "uw", "Print arbitray bytes of the OTA image on disk.", emberCommandTablePluginOtaStorageCommonDataPrintCommandArguments),
+  emberCommandEntryActionWithDetails("delete", emAfOtaImageDelete, "u", "Deletes the image at the specified index.", emberCommandTablePluginOtaStorageCommonDeleteCommandArguments),
+  emberCommandEntryActionWithDetails("printImages", emAfOtaPrintAllImages, "", "Prints the images.", NULL),
+  emberCommandEntryActionWithDetails("reload", emAfOtaReloadStorageDevice, "", "Reload the storage device.", NULL),
+  emberCommandEntryActionWithDetails("storage-info", emAfOtaStorageInfoPrint, "", "Print information about the storage device.", NULL),
+  emberCommandEntryTerminator()
+};
+
+PGM_P PGM emberCommandTablePluginOtaClientBootloadCommandArguments[] = {
+  "The index at which to begin bootloading the image",
+  NULL
+};
+
+PGM_P PGM emberCommandTablePluginOtaClientPageRequestCommandArguments[] = {
+  "boolean value turning on (1) or off (0) the page request flag",
+  NULL
+};
+
+PGM_P PGM emberCommandTablePluginOtaClientPauseAtCommandArguments[] = {
+  "stop download percentage",
+  NULL
+};
+
+PGM_P PGM emberCommandTablePluginOtaClientVerifyCommandArguments[] = {
+  "The index at which to begin verification of the image",
+  NULL
+};
+
+EmberCommandEntry emberCommandTablePluginOtaClientCommands[] = {
+  emberCommandEntryActionWithDetails("block-test", emAfSendImageBlockRequestTest, "", "Sends an image block request for a file the server should not hav ...", NULL),
+  emberCommandEntryActionWithDetails("bootload", otaCliBootload, "u", "Bootloads the image at the specified index by calling the OTA bootload ...", emberCommandTablePluginOtaClientBootloadCommandArguments),
+  emberCommandEntryActionWithDetails("info", otaPrintClientInfo, "", "Prints the manufacturer ID, Image Type ID, and Version information tha ...", NULL),
+  emberCommandEntryActionWithDetails("page-request", setPageRequest, "u", "", emberCommandTablePluginOtaClientPageRequestCommandArguments),
+  emberCommandEntryActionWithDetails("pause-at", setPausePercentage, "u", "", emberCommandTablePluginOtaClientPauseAtCommandArguments),
+  emberCommandEntryActionWithDetails("start", otaStartClientCommand, "", "Starts the ota client state machin ...", NULL),
+  emberCommandEntryActionWithDetails("status", emAfOtaClientPrintState, "", "Prints information on the current state of the OTA client download.", NULL),
+  emberCommandEntryActionWithDetails("stop", otaStopClientCommand, "", "Stops the OTA state machine", NULL),
+  emberCommandEntryActionWithDetails("upgrade-request", otaSendUpgradeRequest, "", "Send an OTA server an UpgradeEndRequest", NULL),
+  emberCommandEntryActionWithDetails("verify", otaCliVerify, "u", "Perform signature verification on the image at the specified index", emberCommandTablePluginOtaClientVerifyCommandArguments),
+  emberCommandEntryTerminator()
+};
+
+EmberCommandEntry emberCommandTablePluginOtaBootloadCommands[] = {
+  emberCommandEntryActionWithDetails("info", printBootloaderInfoCommand, "", "Prints info about the installed bootloader.", NULL),
+  emberCommandEntryTerminator()
+};
+
 EmberCommandEntry emberCommandTablePluginIdentifyCommands[] = {
   emberCommandEntryActionWithDetails("print", emAfPluginIdentifyCliPrint, "", "Print which endpoints are reporting.", NULL),
   emberCommandEntryTerminator()
@@ -627,11 +715,28 @@ EmberCommandEntry emberCommandTablePluginEzmodeCommissioningCommands[] = {
   emberCommandEntryTerminator()
 };
 
+PGM_P PGM emberCommandTablePluginEepromDataPrintCommandArguments[] = {
+  "The offset within the EEPROM to print.",
+  NULL
+};
+
+EmberCommandEntry emberCommandTablePluginEepromCommands[] = {
+  emberCommandEntryActionWithDetails("data-print", emAfEepromDataPrintCommand, "w", "Print raw bytes stored in the EEPROM", emberCommandTablePluginEepromDataPrintCommandArguments),
+  emberCommandEntryActionWithDetails("info", emAfEepromInfoCommand, "", "Print detailed info about the EEPROM part.", NULL),
+  emberCommandEntryActionWithDetails("status", emAfEepromStatusCommand, "", "Print the state of the EEPROM driver.", NULL),
+  emberCommandEntryTerminator()
+};
+
 EmberCommandEntry emberCommandTablePluginCommands[] = {
+  emberCommandEntrySubMenu("eeprom", emberCommandTablePluginEepromCommands, ""),
   emberCommandEntrySubMenu("ezmode-commissioning", emberCommandTablePluginEzmodeCommissioningCommands, ""),
   emberCommandEntrySubMenu("find-and-bind", emberCommandTablePluginFindAndBindCommands, ""),
   emberCommandEntrySubMenu("groups-server", emberCommandTablePluginGroupsServerCommands, ""),
   emberCommandEntrySubMenu("identify", emberCommandTablePluginIdentifyCommands, ""),
+  emberCommandEntrySubMenu("ota-bootload", emberCommandTablePluginOtaBootloadCommands, ""),
+  emberCommandEntrySubMenu("ota-client", emberCommandTablePluginOtaClientCommands, ""),
+  emberCommandEntrySubMenu("ota-storage-common", emberCommandTablePluginOtaStorageCommonCommands, ""),
+  emberCommandEntrySubMenu("ota-storage-eeprom", emberCommandTablePluginOtaStorageEepromCommands, ""),
   emberCommandEntrySubMenu("reporting", emberCommandTablePluginReportingCommands, ""),
   emberCommandEntrySubMenu("scenes", emberCommandTablePluginScenesCommands, ""),
   emberCommandEntryTerminator()

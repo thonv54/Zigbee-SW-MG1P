@@ -1,5 +1,5 @@
 #ISD App Configuration:3.1
-# ISD version: 4.13.0.201703081938-329
+# ISD version: 4.16.0.201705021924-445
 #  Identified of a stack descriptor used for this configuration. This should not
 #  be changed manually, unless you really know what you are doing.
 ConfiguratorID:auto-EM35X
@@ -27,6 +27,11 @@ EndpointType:Light,256
 
 #  The ZCL device that this particular endpoint is implementing.
 DeviceType:Light,HA-onofflight
+
+#  Overrides a particular client configuration. This happens when you have
+#  chosen to include/exclude a client cluster that is optional. Contains
+#  'clusterId', 'exclude/include' and the endpoint type name.
+OverrideClient:19,include,Light
 
 #  Type of the endpoint. Each endpoint implement one endpoint type. There can be
 #  one or more endpoint types, regardless of number of actual endpoints.
@@ -133,9 +138,6 @@ AddressTableSize:2
 #  address cache. The total size of the address table will be equal to this
 #  value plus the size of the address table set in the AddressTableSize.
 TrustCenterCacheSize:2
-
-#  Manufacturing code user in reporting.
-ManufacturingCode:4098
 
 #  Maximum number of supported reported attributes.
 ReportTableSize:5
@@ -321,7 +323,7 @@ PATH(STACK_RELATIVE):app/builder/ZigbeeSW/Uart_V2
 PATH(STACK_RELATIVE):app/builder/ZigbeeSW/CommonLed
 PATH(STACK_RELATIVE):app/builder/ZigbeeSW/CommonButton
 PATH(STACK_RELATIVE):app/builder/ZigbeeSW/Com
-PATH(STACK_RELATIVE):app/builder/ZigbeeSW/SW1_config
+PATH(STACK_RELATIVE):app/builder/ZigbeeSW/SW2_config
 }
 {setupId:boardHeader
 efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]=BOARD,efr32/brd4300b,,
@@ -329,7 +331,7 @@ efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flas
 {setupId:bookkeeping
 }
 {setupId:bootloader
-efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]=null,
+efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]=application,
 }
 {setupId:callbackConfiguration
 }
@@ -339,17 +341,19 @@ area name off
 appSerial=1
 compile,BASIC_CLUSTER
 compile,DEBUG
-compile,GROUPS_CLUSTER
+remove,GROUPS_CLUSTER
 compile,IDENTIFY_CLUSTER
 compile,ON_OFF_CLUSTER
+compile,OTA_BOOTLOAD_CLUSTER
 compile,REPORTING
-compile,SCENES_CLUSTER
+remove,SCENES_CLUSTER
 compile,ZDO
 enable,BASIC_CLUSTER
 enable,DEBUG
 enable,GROUPS_CLUSTER
 enable,IDENTIFY_CLUSTER
 enable,ON_OFF_CLUSTER
+enable,OTA_BOOTLOAD_CLUSTER
 enable,SCENES_CLUSTER
 }
 {setupId:halOptions
@@ -465,7 +469,7 @@ power=3
 {setupId:rf4ceZrc
 }
 {setupId:serial
-efr32=0,false,*,*,*,*,*
+efr32=0,false,*,*,*,*,*,*1,false,*,*,*,*,*
 }
 {setupId:template
 }
@@ -522,7 +526,7 @@ appPlugin:drlc,false
 
 appPlugin:drlc-server,false
 
-appPlugin:eeprom,false
+appPlugin:eeprom,true
 
 appPlugin:ember-minimal-printf,true
 
@@ -608,25 +612,25 @@ appPlugin:network-steering,false
 
 appPlugin:on-off,true
 
-appPlugin:ota-bootload,false
+appPlugin:ota-bootload,true
 
-appPlugin:ota-client,false
+appPlugin:ota-client,true
 
-appPlugin:ota-client-policy,false
+appPlugin:ota-client-policy,true
 
-appPlugin:ota-common,false
+appPlugin:ota-common,true
 
 appPlugin:ota-server,false
 
 appPlugin:ota-server-policy,false
 
-appPlugin:ota-storage-common,false
+appPlugin:ota-storage-common,true
 
 appPlugin:ota-storage-posix-filesystem,false
 
-appPlugin:ota-storage-simple,false
+appPlugin:ota-storage-simple,true
 
-appPlugin:ota-storage-simple-eeprom,false
+appPlugin:ota-storage-simple-eeprom,true
 
 appPlugin:ota-storage-simple-ram,false
 
@@ -960,4 +964,14 @@ AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]
 AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_NETWORK_FIND_RADIO_TX_POWER,10
 
 AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_NETWORK_FIND_CHANNEL_MASK,0x03FFF800UL
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_REPORTING_TABLE_SIZE,8
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_BINDING_TABLE_SIZE,16
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_OTA_STORAGE_SIMPLE_EEPROM_STORAGE_END,262144
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_OTA_STORAGE_SIMPLE_EEPROM_READ_MODIFY_WRITE_SUPPORT,false
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_OTA_CLIENT_DOWNLOAD_DELAY_MS,1000
 

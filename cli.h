@@ -872,22 +872,6 @@
 
 /** @} */ // end group plugin-ezmode-commissioning
 
-/** @addtogroup plugin-find-and-bind-target Plugin Commands: Find and Bind Target
- * @ingroup cli
- * Commands for the finding and binding target process from the Base Device
- * Behavior spec.
- * 
- * @{
- */
-
-/** @brief <b>plugin find-and-bind target [endpoint:1] </b>
- *   - <i>Makes this node start identifying as a target for binding with an initiator node.</i>
- *     - endpoint - INT8U - The endpoint on which to begin the Finding and Binding target process.
- */
-#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_FIND_AND_BIND_TARGET_PLUGIN_FIND_AND_BIND_TARGET
-
-/** @} */ // end group plugin-find-and-bind-target
-
 /** @addtogroup plugin-groups-server Plugin Commands: Groups Server
  * @ingroup cli
  * The groups server plugin contributes a CLI command to the application
@@ -1326,16 +1310,6 @@
  */
 
 /** @} */ // end group plugin-ezmode-commissioning
-
-/** @addtogroup plugin-find-and-bind-target Plugin Commands: Find and Bind Target
- * @ingroup cli
- * Commands for the finding and binding target process from the Base Device
- * Behavior spec.
- * 
- * @{
- */
-
-/** @} */ // end group plugin-find-and-bind-target
 
 /** @addtogroup plugin-groups-server Plugin Commands: Groups Server
  * @ingroup cli

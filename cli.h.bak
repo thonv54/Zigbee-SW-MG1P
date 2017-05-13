@@ -819,6 +819,34 @@
 
 /** @} */ // end group on-off
 
+/** @addtogroup plugin-eeprom Plugin Commands: EEPROM
+ * @ingroup cli
+ * The OTA Storage Common plugin provides Over-the-air commands for upgrading
+ * firmware and 
+      downloading specific files common to both server and
+ * client.
+ * 
+ * @{
+ */
+
+/** @brief <b>plugin eeprom data-print [offset:4] </b>
+ *   - <i>Print raw bytes stored in the EEPROM</i>
+ *     - offset - INT32U - The offset within the EEPROM to print.
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_EEPROM_PLUGIN_EEPROM_DATA_PRINT
+
+/** @brief <b>plugin eeprom status </b>
+ *   - <i>Print the state of the EEPROM driver.</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_EEPROM_PLUGIN_EEPROM_STATUS
+
+/** @brief <b>plugin eeprom info </b>
+ *   - <i>Print detailed info about the EEPROM part.</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_EEPROM_PLUGIN_EEPROM_INFO
+
+/** @} */ // end group plugin-eeprom
+
 /** @addtogroup plugin-ezmode-commissioning Plugin Commands: EZ-Mode Commissioning
  * @ingroup cli
  * The EZ-Mode Commissioning plugin contributes several commands to the
@@ -894,6 +922,138 @@
 #define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_IDENTIFY_PLUGIN_IDENTIFY_PRINT
 
 /** @} */ // end group plugin-identify
+
+/** @addtogroup plugin-ota-bootload Plugin Commands: OTA Bootload
+ * @ingroup cli
+ * The OTA Bootload Plugin provides information on the installed bootloader.
+ * 
+ * @{
+ */
+
+/** @brief <b>plugin ota-bootload info </b>
+ *   - <i>Prints info about the installed bootloader.</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_BOOTLOAD_PLUGIN_OTA_BOOTLOAD_INFO
+
+/** @} */ // end group plugin-ota-bootload
+
+/** @addtogroup plugin-ota-client Plugin Commands: OTA Client
+ * @ingroup cli
+ * The OTA Client plugin provides Over-the-air commands for upgrading firmware
+ * and downloading specific files on the client side.
+ * 
+ * @{
+ */
+
+/** @brief <b>plugin ota-client bootload [index:1] </b>
+ *   - <i>Bootloads the image at the specified index by calling the OTA bootload callback.</i>
+ *     - index - INT8U - The index at which to begin bootloading the image
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_CLIENT_PLUGIN_OTA_CLIENT_BOOTLOAD
+
+/** @brief <b>plugin ota-client verify [index:1] </b>
+ *   - <i>Perform signature verification on the image at the specified index</i>
+ *     - index - INT8U - The index at which to begin verification of the image
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_CLIENT_PLUGIN_OTA_CLIENT_VERIFY
+
+/** @brief <b>plugin ota-client info </b>
+ *   - <i>Prints the manufacturer ID, Image Type ID, and Version information that are used when a query next image is sent to the server by the client</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_CLIENT_PLUGIN_OTA_CLIENT_INFO
+
+/** @brief <b>plugin ota-client start </b>
+ *   - <i>Starts the ota client state machine. The state machine discovers the OTA server, queries for new images, downloads the images and waits for the server command to upgrade</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_CLIENT_PLUGIN_OTA_CLIENT_START
+
+/** @brief <b>plugin ota-client stop </b>
+ *   - <i>Stops the OTA state machine</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_CLIENT_PLUGIN_OTA_CLIENT_STOP
+
+/** @brief <b>plugin ota-client status </b>
+ *   - <i>Prints information on the current state of the OTA client download.</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_CLIENT_PLUGIN_OTA_CLIENT_STATUS
+
+/** @brief <b>plugin ota-client block-test </b>
+ *   - <i>Sends an image block request for a file the server should not have.  Test harness only (test case 9.5.6 - Missing File)</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_CLIENT_PLUGIN_OTA_CLIENT_BLOCK_TEST
+
+/** @brief <b>plugin ota-client page-request [pageRequest:1] </b>
+ *   - <i></i>
+ *     - pageRequest - INT8U - boolean value turning on (1) or off (0) the page request flag
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_CLIENT_PLUGIN_OTA_CLIENT_PAGE_REQUEST
+
+/** @brief <b>plugin ota-client pause-at [stopDownloadPercentage:1] </b>
+ *   - <i></i>
+ *     - stopDownloadPercentage - INT8U
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_CLIENT_PLUGIN_OTA_CLIENT_PAUSE_AT
+
+/** @brief <b>plugin ota-client upgrade-request </b>
+ *   - <i>Send an OTA server an UpgradeEndRequest</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_CLIENT_PLUGIN_OTA_CLIENT_UPGRADE_REQUEST
+
+/** @} */ // end group plugin-ota-client
+
+/** @addtogroup plugin-ota-storage-simple-eeprom Plugin Commands: OTA Simple Storage EEPROM
+ * @ingroup cli
+ * These commands are specific to the OTA Simple Storage EEPROM plugin.
+ * 
+ * @{
+ */
+
+/** @brief <b>plugin ota-storage-eeprom wipe </b>
+ *   - <i>Wipes all data in the storage device.</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_STORAGE_SIMPLE_EEPROM_PLUGIN_OTA_STORAGE_EEPROM_WIPE
+
+/** @} */ // end group plugin-ota-storage-simple-eeprom
+
+/** @addtogroup plugin-ota-storage-common Plugin Commands: OTA Storage Common
+ * @ingroup cli
+ * The OTA Storage Common plugin provides Over-the-air commands for upgrading
+ * firmware and 
+      downloading specific files common to both server and
+ * client.
+ * 
+ * @{
+ */
+
+/** @brief <b>plugin ota-storage-common printImages </b>
+ *   - <i>Prints the images.</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_STORAGE_COMMON_PLUGIN_OTA_STORAGE_COMMON_PRINT_IMAGES
+
+/** @brief <b>plugin ota-storage-common delete [index:1] </b>
+ *   - <i>Deletes the image at the specified index.</i>
+ *     - index - INT8U - The index at which to begin bootloading the image
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_STORAGE_COMMON_PLUGIN_OTA_STORAGE_COMMON_DELETE
+
+/** @brief <b>plugin ota-storage-common reload </b>
+ *   - <i>Reload the storage device.</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_STORAGE_COMMON_PLUGIN_OTA_STORAGE_COMMON_RELOAD
+
+/** @brief <b>plugin ota-storage-common storage-info </b>
+ *   - <i>Print information about the storage device.</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_STORAGE_COMMON_PLUGIN_OTA_STORAGE_COMMON_STORAGE_INFO
+
+/** @brief <b>plugin ota-storage-common data-print [index:1] [offset:4] </b>
+ *   - <i>Print arbitray bytes of the OTA image on disk.</i>
+ *     - index - INT8U - The index of the image to print its data.
+ *     - offset - INT32U - The offset into the OTA image that will be printed.
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_OTA_STORAGE_COMMON_PLUGIN_OTA_STORAGE_COMMON_DATA_PRINT
+
+/** @} */ // end group plugin-ota-storage-common
 
 /** @addtogroup plugin-reporting Plugin Commands: Reporting
  * @ingroup cli
@@ -1145,6 +1305,18 @@
 
 /** @} */ // end group on-off
 
+/** @addtogroup plugin-eeprom Plugin Commands: EEPROM
+ * @ingroup cli
+ * The OTA Storage Common plugin provides Over-the-air commands for upgrading
+ * firmware and 
+      downloading specific files common to both server and
+ * client.
+ * 
+ * @{
+ */
+
+/** @} */ // end group plugin-eeprom
+
 /** @addtogroup plugin-ezmode-commissioning Plugin Commands: EZ-Mode Commissioning
  * @ingroup cli
  * The EZ-Mode Commissioning plugin contributes several commands to the
@@ -1184,6 +1356,46 @@
  */
 
 /** @} */ // end group plugin-identify
+
+/** @addtogroup plugin-ota-bootload Plugin Commands: OTA Bootload
+ * @ingroup cli
+ * The OTA Bootload Plugin provides information on the installed bootloader.
+ * 
+ * @{
+ */
+
+/** @} */ // end group plugin-ota-bootload
+
+/** @addtogroup plugin-ota-client Plugin Commands: OTA Client
+ * @ingroup cli
+ * The OTA Client plugin provides Over-the-air commands for upgrading firmware
+ * and downloading specific files on the client side.
+ * 
+ * @{
+ */
+
+/** @} */ // end group plugin-ota-client
+
+/** @addtogroup plugin-ota-storage-simple-eeprom Plugin Commands: OTA Simple Storage EEPROM
+ * @ingroup cli
+ * These commands are specific to the OTA Simple Storage EEPROM plugin.
+ * 
+ * @{
+ */
+
+/** @} */ // end group plugin-ota-storage-simple-eeprom
+
+/** @addtogroup plugin-ota-storage-common Plugin Commands: OTA Storage Common
+ * @ingroup cli
+ * The OTA Storage Common plugin provides Over-the-air commands for upgrading
+ * firmware and 
+      downloading specific files common to both server and
+ * client.
+ * 
+ * @{
+ */
+
+/** @} */ // end group plugin-ota-storage-common
 
 /** @addtogroup plugin-reporting Plugin Commands: Reporting
  * @ingroup cli

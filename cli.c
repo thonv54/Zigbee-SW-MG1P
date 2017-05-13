@@ -43,7 +43,6 @@ void emAfPluginScenesServerPrintInfo(void);
 void emAfSendImageBlockRequestTest(void);
 void emberAfPluginEzModeCommissioningClientCommand(void);
 void emberAfPluginEzModeCommissioningServerCommand(void);
-void emberAfPluginFindAndBindTargetStartCommand(void);
 void emberAfPrintAllOff(void);
 void emberAfPrintAllOn(void);
 void emberAfPrintAttributeTable(void);
@@ -685,16 +684,6 @@ EmberCommandEntry emberCommandTablePluginGroupsServerCommands[] = {
   emberCommandEntryTerminator()
 };
 
-PGM_P PGM emberCommandTablePluginFindAndBindTargetCommandArguments[] = {
-  "The endpoint on which to begin the Finding and Binding target process.",
-  NULL
-};
-
-EmberCommandEntry emberCommandTablePluginFindAndBindCommands[] = {
-  emberCommandEntryActionWithDetails("target", emberAfPluginFindAndBindTargetStartCommand, "u", "Makes this node start identifying as a target for binding with an init ...", emberCommandTablePluginFindAndBindTargetCommandArguments),
-  emberCommandEntryTerminator()
-};
-
 PGM_P PGM emberCommandTablePluginEzmodeCommissioningClientCommandArguments[] = {
   "The local endpoint.",
   "::EMBER_AF_EZMODE_COMMISSIONING_SERVER_TO_CLIENT or ::EMBER_AF_EZMODE_ ...",
@@ -730,7 +719,6 @@ EmberCommandEntry emberCommandTablePluginEepromCommands[] = {
 EmberCommandEntry emberCommandTablePluginCommands[] = {
   emberCommandEntrySubMenu("eeprom", emberCommandTablePluginEepromCommands, ""),
   emberCommandEntrySubMenu("ezmode-commissioning", emberCommandTablePluginEzmodeCommissioningCommands, ""),
-  emberCommandEntrySubMenu("find-and-bind", emberCommandTablePluginFindAndBindCommands, ""),
   emberCommandEntrySubMenu("groups-server", emberCommandTablePluginGroupsServerCommands, ""),
   emberCommandEntrySubMenu("identify", emberCommandTablePluginIdentifyCommands, ""),
   emberCommandEntrySubMenu("ota-bootload", emberCommandTablePluginOtaBootloadCommands, ""),

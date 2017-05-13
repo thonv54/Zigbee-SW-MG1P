@@ -8,19 +8,23 @@
 
 
 // Fixed number of defined endpoints
-#define FIXED_ENDPOINT_COUNT (8)
+#define FIXED_ENDPOINT_COUNT (4)
 
 
 // Generated defaults
 #if BIGENDIAN_CPU
 #define GENERATED_DEFAULTS { \
-8,'L','u','m','i',' ','R','&','D',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 0,Default value: Basic,manufacturer name */, \
-6,'L','M','-','S','Z','4',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 33,Default value: Basic,model identifier */, \
+4,'L','u','m','i',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 0,Default value: Basic,manufacturer name */, \
+6,'L','M','-','S','Z','2',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 33,Default value: Basic,model identifier */, \
+0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF /* 66,Default value: Over the Air Bootloading,OTA Upgrade Server ID */, \
+0xFF, 0xFF, 0xFF, 0xFF /* 74,Default value: Over the Air Bootloading,Offset (address) into the file */, \
   }
 #else // ! BIGENDIAN_CPU
 #define GENERATED_DEFAULTS { \
-8,'L','u','m','i',' ','R','&','D',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 0,Default value: Basic,manufacturer name */, \
-6,'L','M','-','S','Z','4',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 33,Default value: Basic,model identifier */, \
+4,'L','u','m','i',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 0,Default value: Basic,manufacturer name */, \
+6,'L','M','-','S','Z','2',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 33,Default value: Basic,model identifier */, \
+0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF /* 66,Default value: Over the Air Bootloading,OTA Upgrade Server ID */, \
+0xFF, 0xFF, 0xFF, 0xFF /* 74,Default value: Over the Air Bootloading,Offset (address) into the file */, \
   }
 #endif // BIGENDIAN_CPU
 
@@ -48,7 +52,7 @@
       (uint8_t*)0xFF \
     }, \
     { \
-      (uint8_t*)0x00, \
+      (uint8_t*)1, \
       (uint8_t*)0x00, \
       (uint8_t*)0xFF \
     }, \
@@ -117,8 +121,8 @@
     { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (0x00), { (uint8_t*)0x0001 } }, /* 17 / Scenes / cluster revision*/\
     { 0x0000, ZCL_BOOLEAN_ATTRIBUTE_TYPE, 1, (ATTRIBUTE_MASK_MIN_MAX), { (uint8_t*)&(minMaxDefaults[12]) } }, /* 18 / On/off / on/off*/\
     { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (0x00), { (uint8_t*)0x0001 } }, /* 19 / On/off / cluster revision*/\
-    { 0x0000, ZCL_IEEE_ADDRESS_ATTRIBUTE_TYPE, 8, (ATTRIBUTE_MASK_CLIENT), { NULL } }, /* 20 / Over the Air Bootloading / OTA Upgrade Server ID*/\
-    { 0x0001, ZCL_INT32U_ATTRIBUTE_TYPE, 4, (ATTRIBUTE_MASK_CLIENT), { NULL } }, /* 21 / Over the Air Bootloading / Offset (address) into the file*/\
+    { 0x0000, ZCL_IEEE_ADDRESS_ATTRIBUTE_TYPE, 8, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)&(generatedDefaults[66]) } }, /* 20 / Over the Air Bootloading / OTA Upgrade Server ID*/\
+    { 0x0001, ZCL_INT32U_ATTRIBUTE_TYPE, 4, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)&(generatedDefaults[74]) } }, /* 21 / Over the Air Bootloading / Offset (address) into the file*/\
     { 0x0006, ZCL_ENUM8_ATTRIBUTE_TYPE, 1, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)0x00 } }, /* 22 / Over the Air Bootloading / OTA Upgrade Status*/\
   }
 
@@ -187,25 +191,25 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
 #define ATTRIBUTE_SINGLETONS_SIZE (73)
 
 // Total size of attribute storage
-#define ATTRIBUTE_MAX_SIZE 140
+#define ATTRIBUTE_MAX_SIZE 70
 
 // Array of endpoints that are supported
-#define FIXED_ENDPOINT_ARRAY { 1, 2, 3, 4, 5, 6, 7, 8 }
+#define FIXED_ENDPOINT_ARRAY { 1, 2, 3, 4 }
 
 // Array of profile ids
-#define FIXED_PROFILE_IDS { 260, 260, 260, 260, 260, 260, 260, 260 }
+#define FIXED_PROFILE_IDS { 260, 260, 260, 260 }
 
 // Array of profile ids
-#define FIXED_DEVICE_IDS { 256, 259, 256, 259, 256, 259, 256, 259 }
+#define FIXED_DEVICE_IDS { 256, 259, 256, 259 }
 
 // Array of profile ids
-#define FIXED_DEVICE_VERSIONS { 0, 0, 0, 0, 0, 0, 0, 0 }
+#define FIXED_DEVICE_VERSIONS { 0, 0, 0, 0 }
 
 // Array of endpoint types supported on each endpoint
-#define FIXED_ENDPOINT_TYPES { 0, 1, 0, 1, 0, 1, 0, 1 }
+#define FIXED_ENDPOINT_TYPES { 0, 1, 0, 1 }
 
 // Array of networks supported on each endpoint
-#define FIXED_NETWORKS { 0, 0, 0, 0, 0, 0, 0, 0 }
+#define FIXED_NETWORKS { 0, 0, 0, 0 }
 
 
 // Code used to configure the cluster event mechanism
@@ -216,12 +220,6 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
   EmberEventControl emberAfIdentifyClusterServerTickCallbackControl3; \
   EmberEventControl emberAfOtaBootloadClusterClientTickCallbackControl3; \
   EmberEventControl emberAfIdentifyClusterServerTickCallbackControl4; \
-  EmberEventControl emberAfIdentifyClusterServerTickCallbackControl5; \
-  EmberEventControl emberAfOtaBootloadClusterClientTickCallbackControl5; \
-  EmberEventControl emberAfIdentifyClusterServerTickCallbackControl6; \
-  EmberEventControl emberAfIdentifyClusterServerTickCallbackControl7; \
-  EmberEventControl emberAfOtaBootloadClusterClientTickCallbackControl7; \
-  EmberEventControl emberAfIdentifyClusterServerTickCallbackControl8; \
   extern EmberEventControl emberAfPluginEzmodeCommissioningStateEventControl; \
   extern void emberAfPluginEzmodeCommissioningStateEventHandler(void); \
   extern EmberEventControl emberAfPluginFormAndJoinCleanupEventControl; \
@@ -230,10 +228,10 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
   extern void emberAfPluginIdentifyFeedbackProvideFeedbackEventHandler(void); \
   extern EmberEventControl emberAfPluginNetworkFindTickEventControl; \
   extern void emberAfPluginNetworkFindTickEventHandler(void); \
-  extern EmberEventControl emberAfPluginOtaStorageSimpleEepromPageEraseEventControl; \
-  extern void emberAfPluginOtaStorageSimpleEepromPageEraseEventHandler(void); \
   extern EmberEventControl emberAfPluginReportingTickEventControl; \
   extern void emberAfPluginReportingTickEventHandler(void); \
+  extern EmberEventControl emberAfPluginOtaStorageSimpleEepromPageEraseEventControl; \
+  extern void emberAfPluginOtaStorageSimpleEepromPageEraseEventHandler(void); \
   extern EmberEventControl NwkJoinEventControl; \
   extern void NwkJoinEventFunction(void); \
   extern EmberEventControl DeviceResetEventControl; \
@@ -263,12 +261,6 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
   void emberAfIdentifyClusterServerTickCallbackWrapperFunction3(void) { clusterTickWrapper(&emberAfIdentifyClusterServerTickCallbackControl3, emberAfIdentifyClusterServerTickCallback, 3); } \
   void emberAfOtaBootloadClusterClientTickCallbackWrapperFunction3(void) { clusterTickWrapper(&emberAfOtaBootloadClusterClientTickCallbackControl3, emberAfOtaBootloadClusterClientTickCallback, 3); } \
   void emberAfIdentifyClusterServerTickCallbackWrapperFunction4(void) { clusterTickWrapper(&emberAfIdentifyClusterServerTickCallbackControl4, emberAfIdentifyClusterServerTickCallback, 4); } \
-  void emberAfIdentifyClusterServerTickCallbackWrapperFunction5(void) { clusterTickWrapper(&emberAfIdentifyClusterServerTickCallbackControl5, emberAfIdentifyClusterServerTickCallback, 5); } \
-  void emberAfOtaBootloadClusterClientTickCallbackWrapperFunction5(void) { clusterTickWrapper(&emberAfOtaBootloadClusterClientTickCallbackControl5, emberAfOtaBootloadClusterClientTickCallback, 5); } \
-  void emberAfIdentifyClusterServerTickCallbackWrapperFunction6(void) { clusterTickWrapper(&emberAfIdentifyClusterServerTickCallbackControl6, emberAfIdentifyClusterServerTickCallback, 6); } \
-  void emberAfIdentifyClusterServerTickCallbackWrapperFunction7(void) { clusterTickWrapper(&emberAfIdentifyClusterServerTickCallbackControl7, emberAfIdentifyClusterServerTickCallback, 7); } \
-  void emberAfOtaBootloadClusterClientTickCallbackWrapperFunction7(void) { clusterTickWrapper(&emberAfOtaBootloadClusterClientTickCallbackControl7, emberAfOtaBootloadClusterClientTickCallback, 7); } \
-  void emberAfIdentifyClusterServerTickCallbackWrapperFunction8(void) { clusterTickWrapper(&emberAfIdentifyClusterServerTickCallbackControl8, emberAfIdentifyClusterServerTickCallback, 8); } \
 
 
 // EmberEventData structs used to populate the EmberEventData table
@@ -279,18 +271,12 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
   { &emberAfIdentifyClusterServerTickCallbackControl3, emberAfIdentifyClusterServerTickCallbackWrapperFunction3 }, \
   { &emberAfOtaBootloadClusterClientTickCallbackControl3, emberAfOtaBootloadClusterClientTickCallbackWrapperFunction3 }, \
   { &emberAfIdentifyClusterServerTickCallbackControl4, emberAfIdentifyClusterServerTickCallbackWrapperFunction4 }, \
-  { &emberAfIdentifyClusterServerTickCallbackControl5, emberAfIdentifyClusterServerTickCallbackWrapperFunction5 }, \
-  { &emberAfOtaBootloadClusterClientTickCallbackControl5, emberAfOtaBootloadClusterClientTickCallbackWrapperFunction5 }, \
-  { &emberAfIdentifyClusterServerTickCallbackControl6, emberAfIdentifyClusterServerTickCallbackWrapperFunction6 }, \
-  { &emberAfIdentifyClusterServerTickCallbackControl7, emberAfIdentifyClusterServerTickCallbackWrapperFunction7 }, \
-  { &emberAfOtaBootloadClusterClientTickCallbackControl7, emberAfOtaBootloadClusterClientTickCallbackWrapperFunction7 }, \
-  { &emberAfIdentifyClusterServerTickCallbackControl8, emberAfIdentifyClusterServerTickCallbackWrapperFunction8 }, \
   { &emberAfPluginEzmodeCommissioningStateEventControl, emberAfPluginEzmodeCommissioningStateEventHandler }, \
   { &emberAfPluginFormAndJoinCleanupEventControl, emberAfPluginFormAndJoinCleanupEventHandler }, \
   { &emberAfPluginIdentifyFeedbackProvideFeedbackEventControl, emberAfPluginIdentifyFeedbackProvideFeedbackEventHandler }, \
   { &emberAfPluginNetworkFindTickEventControl, emberAfPluginNetworkFindTickEventHandler }, \
-  { &emberAfPluginOtaStorageSimpleEepromPageEraseEventControl, emberAfPluginOtaStorageSimpleEepromPageEraseEventHandler }, \
   { &emberAfPluginReportingTickEventControl, emberAfPluginReportingTickEventHandler }, \
+  { &emberAfPluginOtaStorageSimpleEepromPageEraseEventControl, emberAfPluginOtaStorageSimpleEepromPageEraseEventHandler }, \
   { &NwkJoinEventControl, NwkJoinEventFunction }, \
   { &DeviceResetEventControl, DeviceResetEventFunction }, \
   { &UartSendEventControl, UartSendEventFunction }, \
@@ -308,18 +294,12 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
   "Identify Cluster Server EP 3",  \
   "Over the Air Bootloading Cluster Client EP 3",  \
   "Identify Cluster Server EP 4",  \
-  "Identify Cluster Server EP 5",  \
-  "Over the Air Bootloading Cluster Client EP 5",  \
-  "Identify Cluster Server EP 6",  \
-  "Identify Cluster Server EP 7",  \
-  "Over the Air Bootloading Cluster Client EP 7",  \
-  "Identify Cluster Server EP 8",  \
   "EZ-Mode Commissioning Plugin State",  \
   "Form and Join Library Plugin Cleanup",  \
   "Identify Feedback Plugin ProvideFeedback",  \
   "Network Find Plugin Tick",  \
-  "OTA Simple Storage EEPROM Driver Plugin PageErase",  \
   "Reporting Plugin Tick",  \
+  "OTA Simple Storage EEPROM Driver Plugin PageErase",  \
   "NwkJoin Custom",  \
   "DeviceReset Custom",  \
   "UartSend Custom",  \
@@ -331,7 +311,7 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
 
 
 // The length of the event context table used to track and retrieve cluster events
-#define EMBER_AF_EVENT_CONTEXT_LENGTH 12
+#define EMBER_AF_EVENT_CONTEXT_LENGTH 6
 
 // EmberAfEventContext structs used to populate the EmberAfEventContext table
 #define EMBER_AF_GENERATED_EVENT_CONTEXT { 0x1, 0x3, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfIdentifyClusterServerTickCallbackControl1}, \
@@ -339,25 +319,19 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
 { 0x2, 0x3, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfIdentifyClusterServerTickCallbackControl2}, \
 { 0x3, 0x3, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfIdentifyClusterServerTickCallbackControl3}, \
 { 0x3, 0x19, true, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfOtaBootloadClusterClientTickCallbackControl3}, \
-{ 0x4, 0x3, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfIdentifyClusterServerTickCallbackControl4}, \
-{ 0x5, 0x3, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfIdentifyClusterServerTickCallbackControl5}, \
-{ 0x5, 0x19, true, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfOtaBootloadClusterClientTickCallbackControl5}, \
-{ 0x6, 0x3, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfIdentifyClusterServerTickCallbackControl6}, \
-{ 0x7, 0x3, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfIdentifyClusterServerTickCallbackControl7}, \
-{ 0x7, 0x19, true, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfOtaBootloadClusterClientTickCallbackControl7}, \
-{ 0x8, 0x3, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfIdentifyClusterServerTickCallbackControl8}
+{ 0x4, 0x3, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfIdentifyClusterServerTickCallbackControl4}
 
 
 #define EMBER_AF_GENERATED_PLUGIN_INIT_FUNCTION_DECLARATIONS \
-  void emberAfPluginEepromInitCallback(void); \
   void emberAfPluginNetworkFindInitCallback(void); \
   void emberAfPluginReportingInitCallback(void); \
+  void emberAfPluginEepromInitCallback(void); \
 
 
 #define EMBER_AF_GENERATED_PLUGIN_INIT_FUNCTION_CALLS \
-  emberAfPluginEepromInitCallback(); \
   emberAfPluginNetworkFindInitCallback(); \
   emberAfPluginReportingInitCallback(); \
+  emberAfPluginEepromInitCallback(); \
 
 
 #define EMBER_AF_GENERATED_PLUGIN_STACK_STATUS_FUNCTION_DECLARATIONS \
