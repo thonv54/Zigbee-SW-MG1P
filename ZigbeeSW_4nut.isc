@@ -978,3 +978,9 @@ AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]
 
 AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_OTA_STORAGE_SIMPLE_EEPROM_READ_MODIFY_WRITE_SUPPORT,false
 
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):DESTRUCTIVE_SIMEE2TO1_DOWNGRADE,false
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_BINDING_TABLE_SIZE,16
+
+AppPluginOption(efr32~family[M]~series[1]~device_configuration[1]~performance[P]~radio[132]~flash[256K]~temp[G]~package[M]~pins[48]):EMBER_AF_PLUGIN_REPORTING_TABLE_SIZE,8
+

@@ -20292,5 +20292,18 @@ EmberAfStatus emberAfPluginReportingConfiguredCallback(const EmberAfPluginReport
 /** @} END Reporting Plugin Callbacks */
 
 
+/** @name OTA Simple Storage EEPROM Driver Plugin Callbacks */
+// @{
+
+/** @brief Erase Complete
+ *
+ * This is called when an EEPROM erase operation has completed.
+ *
+ * @param success The result of the erase operation. Ver.: always
+ */
+void emberAfPluginOtaStorageSimpleEepromEraseCompleteCallback(bool success);
+/** @} END OTA Simple Storage EEPROM Driver Plugin Callbacks */
+
+
 /** @} END addtogroup */
 #endif // __EMBER_AF_CALLBACK_PROTOTYPES__

@@ -230,10 +230,10 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
   extern void emberAfPluginIdentifyFeedbackProvideFeedbackEventHandler(void); \
   extern EmberEventControl emberAfPluginNetworkFindTickEventControl; \
   extern void emberAfPluginNetworkFindTickEventHandler(void); \
-  extern EmberEventControl emberAfPluginReportingTickEventControl; \
-  extern void emberAfPluginReportingTickEventHandler(void); \
   extern EmberEventControl emberAfPluginOtaStorageSimpleEepromPageEraseEventControl; \
   extern void emberAfPluginOtaStorageSimpleEepromPageEraseEventHandler(void); \
+  extern EmberEventControl emberAfPluginReportingTickEventControl; \
+  extern void emberAfPluginReportingTickEventHandler(void); \
   extern EmberEventControl NwkJoinEventControl; \
   extern void NwkJoinEventFunction(void); \
   extern EmberEventControl DeviceResetEventControl; \
@@ -289,8 +289,8 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
   { &emberAfPluginFormAndJoinCleanupEventControl, emberAfPluginFormAndJoinCleanupEventHandler }, \
   { &emberAfPluginIdentifyFeedbackProvideFeedbackEventControl, emberAfPluginIdentifyFeedbackProvideFeedbackEventHandler }, \
   { &emberAfPluginNetworkFindTickEventControl, emberAfPluginNetworkFindTickEventHandler }, \
-  { &emberAfPluginReportingTickEventControl, emberAfPluginReportingTickEventHandler }, \
   { &emberAfPluginOtaStorageSimpleEepromPageEraseEventControl, emberAfPluginOtaStorageSimpleEepromPageEraseEventHandler }, \
+  { &emberAfPluginReportingTickEventControl, emberAfPluginReportingTickEventHandler }, \
   { &NwkJoinEventControl, NwkJoinEventFunction }, \
   { &DeviceResetEventControl, DeviceResetEventFunction }, \
   { &UartSendEventControl, UartSendEventFunction }, \
@@ -318,8 +318,8 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
   "Form and Join Library Plugin Cleanup",  \
   "Identify Feedback Plugin ProvideFeedback",  \
   "Network Find Plugin Tick",  \
-  "Reporting Plugin Tick",  \
   "OTA Simple Storage EEPROM Driver Plugin PageErase",  \
+  "Reporting Plugin Tick",  \
   "NwkJoin Custom",  \
   "DeviceReset Custom",  \
   "UartSend Custom",  \
@@ -349,15 +349,15 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
 
 
 #define EMBER_AF_GENERATED_PLUGIN_INIT_FUNCTION_DECLARATIONS \
+  void emberAfPluginEepromInitCallback(void); \
   void emberAfPluginNetworkFindInitCallback(void); \
   void emberAfPluginReportingInitCallback(void); \
-  void emberAfPluginEepromInitCallback(void); \
 
 
 #define EMBER_AF_GENERATED_PLUGIN_INIT_FUNCTION_CALLS \
+  emberAfPluginEepromInitCallback(); \
   emberAfPluginNetworkFindInitCallback(); \
   emberAfPluginReportingInitCallback(); \
-  emberAfPluginEepromInitCallback(); \
 
 
 #define EMBER_AF_GENERATED_PLUGIN_STACK_STATUS_FUNCTION_DECLARATIONS \
