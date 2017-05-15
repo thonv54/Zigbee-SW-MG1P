@@ -130,6 +130,46 @@ static void zclIdentifyTriggerCommand(void) {
                           ZCL_TRIGGER_EFFECT_COMMAND_ID);
 }
 
+static void zclLevelControlMoveCommand(void) {
+  zclSimpleClientCommand( ZCL_LEVEL_CONTROL_CLUSTER_ID,
+                          ZCL_MOVE_COMMAND_ID);
+}
+
+static void zclLevelControlMvToLevelCommand(void) {
+  zclSimpleClientCommand( ZCL_LEVEL_CONTROL_CLUSTER_ID,
+                          ZCL_MOVE_TO_LEVEL_COMMAND_ID);
+}
+
+static void zclLevelControlOMoveCommand(void) {
+  zclSimpleClientCommand( ZCL_LEVEL_CONTROL_CLUSTER_ID,
+                          ZCL_MOVE_WITH_ON_OFF_COMMAND_ID);
+}
+
+static void zclLevelControlOMvToLevelCommand(void) {
+  zclSimpleClientCommand( ZCL_LEVEL_CONTROL_CLUSTER_ID,
+                          ZCL_MOVE_TO_LEVEL_WITH_ON_OFF_COMMAND_ID);
+}
+
+static void zclLevelControlOStepCommand(void) {
+  zclSimpleClientCommand( ZCL_LEVEL_CONTROL_CLUSTER_ID,
+                          ZCL_STEP_WITH_ON_OFF_COMMAND_ID);
+}
+
+static void zclLevelControlOStopCommand(void) {
+  zclSimpleClientCommand( ZCL_LEVEL_CONTROL_CLUSTER_ID,
+                          ZCL_STOP_WITH_ON_OFF_COMMAND_ID);
+}
+
+static void zclLevelControlStepCommand(void) {
+  zclSimpleClientCommand( ZCL_LEVEL_CONTROL_CLUSTER_ID,
+                          ZCL_STEP_COMMAND_ID);
+}
+
+static void zclLevelControlStopCommand(void) {
+  zclSimpleClientCommand( ZCL_LEVEL_CONTROL_CLUSTER_ID,
+                          ZCL_STOP_COMMAND_ID);
+}
+
 void zclMfgCodeCommand(void);
 static void zclOnOffOffCommand(void) {
   zclSimpleClientCommand( ZCL_ON_OFF_CLUSTER_ID,
@@ -382,6 +422,56 @@ EmberCommandEntry emberCommandTableZclOnOffCommands[] = {
   emberCommandEntryTerminator()
 };
 
+PGM_P PGM emberCommandTableZclLevelControlMoveCommandArguments[] = {
+  "move mode",
+  "rate",
+  NULL
+};
+
+PGM_P PGM emberCommandTableZclLevelControlMvToLevelCommandArguments[] = {
+  "level",
+  "transition time",
+  NULL
+};
+
+PGM_P PGM emberCommandTableZclLevelControlOMoveCommandArguments[] = {
+  "move mode",
+  "rate",
+  NULL
+};
+
+PGM_P PGM emberCommandTableZclLevelControlOMvToLevelCommandArguments[] = {
+  "level",
+  "transition time",
+  NULL
+};
+
+PGM_P PGM emberCommandTableZclLevelControlOStepCommandArguments[] = {
+  "step mode",
+  "step size",
+  "transition time",
+  NULL
+};
+
+PGM_P PGM emberCommandTableZclLevelControlStepCommandArguments[] = {
+  "step mode",
+  "step size",
+  "transition time",
+  NULL
+};
+
+EmberCommandEntry emberCommandTableZclLevelControlCommands[] = {
+  emberCommandEntryActionWithDetails("move", zclLevelControlMoveCommand, "uu", "Command description for Move", emberCommandTableZclLevelControlMoveCommandArguments),
+  emberCommandEntryActionWithDetails("mv-to-level", zclLevelControlMvToLevelCommand, "uv", "Command description for MoveToLevel", emberCommandTableZclLevelControlMvToLevelCommandArguments),
+  emberCommandEntryActionWithDetails("o-move", zclLevelControlOMoveCommand, "uu", "Command description for MoveWithOnOff", emberCommandTableZclLevelControlOMoveCommandArguments),
+  emberCommandEntryActionWithDetails("o-mv-to-level", zclLevelControlOMvToLevelCommand, "uv", "Command description for MoveToLevelWithOnOff", emberCommandTableZclLevelControlOMvToLevelCommandArguments),
+  emberCommandEntryActionWithDetails("o-step", zclLevelControlOStepCommand, "uuv", "Command description for StepWithOnOff", emberCommandTableZclLevelControlOStepCommandArguments),
+  emberCommandEntryActionWithDetails("o-stop", zclLevelControlOStopCommand, "", "Command description for StopWithOnOff", NULL),
+  emberCommandEntryActionWithDetails("step", zclLevelControlStepCommand, "uuv", "Command description for Step", emberCommandTableZclLevelControlStepCommandArguments),
+  emberCommandEntryActionWithDetails("stop", zclLevelControlStopCommand, "", "Command description for Stop", NULL),
+  emberCommandEntryTerminator()
+};
+
 PGM_P PGM emberCommandTableZclIdentifyEzModeCommandArguments[] = {
   "action",
   NULL
@@ -541,6 +631,7 @@ PGM_P PGM emberCommandTableZclXDefaultRespCommandArguments[] = {
 EmberCommandEntry emberCommandTableZclCommands[] = {
   emberCommandEntrySubMenu("global", emberCommandTableZclGlobalCommands, ""),
   emberCommandEntrySubMenu("identify", emberCommandTableZclIdentifyCommands, ""),
+  emberCommandEntrySubMenu("level-control", emberCommandTableZclLevelControlCommands, ""),
   emberCommandEntryActionWithDetails("mfg-code", zclMfgCodeCommand, "v", "Sets the two byte manufacturer specific identifier to use for the next ...", emberCommandTableZclMfgCodeCommandArguments),
   emberCommandEntrySubMenu("on-off", emberCommandTableZclOnOffCommands, ""),
   emberCommandEntrySubMenu("test", emberCommandTableZclTestCommands, ""),

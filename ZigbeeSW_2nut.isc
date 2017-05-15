@@ -449,7 +449,7 @@ using the CLI should perform the following functions.
 \}
 }
 {setupId:macros
--DSWITCH_1_BUTTON_V2
+-DSWITCH_2_BUTTON_V2
 }
 {setupId:mpsi
 - mappings

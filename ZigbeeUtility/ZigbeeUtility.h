@@ -26,7 +26,18 @@ typedef struct {
   /** Value. */
   int8u Value[32];
 
-} EmberAttributeResponse_str;
+} EmberReadAttributeResponse_str;
+
+
+typedef struct {
+  /** The AttributeID of on-off cluster */
+  int16u AttributeID;
+  /** The DataType. */
+  int8u DataType;
+  /** Value. */
+  int8u Value[32];
+
+} EmberReportAttributeResponse_str;
 
 
 //----------------------------Protocol-----------------------//
@@ -35,11 +46,22 @@ void SendViaBindingTable(int8u endpoint,
                            EmberAfAttributeId attributeId,
                            int8u* value,
                            int8u dataType);
+
+#if 0
 void SendGlobalServerToClientReadAttributeResponse(int8u Endpoint, 
 						   EmberAfClusterId clusterId,
 						   EmberAfAttributeId attributeId,
 						   int8u* value,
 						   int8u dataType);
+#else
+#define SendGlobalServerToClientReadAttributeResponse  SendGlobalServerToClientReportAttributeResponse
+void SendGlobalServerToClientReportAttributeResponse(int8u Endpoint, 
+						   EmberAfClusterId clusterId,
+						   EmberAfAttributeId attributeId,
+						   int8u* value,
+						   int8u dataType);
+
+#endif
 void GetHcActiveEndPoint(void);
 void SendBasicReadModelAttributeResponse(void);
 

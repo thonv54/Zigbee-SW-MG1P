@@ -872,22 +872,6 @@
 
 /** @} */ // end group plugin-ezmode-commissioning
 
-/** @addtogroup plugin-find-and-bind-target Plugin Commands: Find and Bind Target
- * @ingroup cli
- * Commands for the finding and binding target process from the Base Device
- * Behavior spec.
- * 
- * @{
- */
-
-/** @brief <b>plugin find-and-bind target [endpoint:1] </b>
- *   - <i>Makes this node start identifying as a target for binding with an initiator node.</i>
- *     - endpoint - INT8U - The endpoint on which to begin the Finding and Binding target process.
- */
-#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_FIND_AND_BIND_TARGET_PLUGIN_FIND_AND_BIND_TARGET
-
-/** @} */ // end group plugin-find-and-bind-target
-
 /** @addtogroup plugin-groups-server Plugin Commands: Groups Server
  * @ingroup cli
  * The groups server plugin contributes a CLI command to the application
@@ -922,6 +906,34 @@
 #define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_IDENTIFY_PLUGIN_IDENTIFY_PRINT
 
 /** @} */ // end group plugin-identify
+
+/** @addtogroup plugin-idle-sleep Plugin Commands: Idle/Sleep
+ * @ingroup cli
+ * The Sleep plugin contributes several commands to the application framework's
+ * CLI.  These commands are used to control the idling and sleeping behavior of
+ * the device.
+ * 
+ * @{
+ */
+
+/** @brief <b>plugin idle-sleep status </b>
+ *   - <i>Display the status of the sleeping behavior.</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_IDLE_SLEEP_PLUGIN_IDLE_SLEEP_STATUS
+
+/** @brief <b>plugin idle-sleep force-awake [stayAwake:1] </b>
+ *   - <i>Sets whether the device is forced to stay awake.</i>
+ *     - stayAwake - BOOLEAN - The value indicating whether the device should stay awake.
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_IDLE_SLEEP_PLUGIN_IDLE_SLEEP_FORCE_AWAKE
+
+/** @brief <b>plugin idle-sleep awake-when-not-joined [stayAwakeWhenNotJoined:1] </b>
+ *   - <i>Sets whether the device stays awake when not joined to a ZigBee network.</i>
+ *     - stayAwakeWhenNotJoined - BOOLEAN - The value indicating whether the device should stay awake when not joined to a ZigBee network.
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_PLUGIN_IDLE_SLEEP_PLUGIN_IDLE_SLEEP_AWAKE_WHEN_NOT_JOINED
+
+/** @} */ // end group plugin-idle-sleep
 
 /** @addtogroup plugin-ota-bootload Plugin Commands: OTA Bootload
  * @ingroup cli
@@ -1327,16 +1339,6 @@
 
 /** @} */ // end group plugin-ezmode-commissioning
 
-/** @addtogroup plugin-find-and-bind-target Plugin Commands: Find and Bind Target
- * @ingroup cli
- * Commands for the finding and binding target process from the Base Device
- * Behavior spec.
- * 
- * @{
- */
-
-/** @} */ // end group plugin-find-and-bind-target
-
 /** @addtogroup plugin-groups-server Plugin Commands: Groups Server
  * @ingroup cli
  * The groups server plugin contributes a CLI command to the application
@@ -1356,6 +1358,17 @@
  */
 
 /** @} */ // end group plugin-identify
+
+/** @addtogroup plugin-idle-sleep Plugin Commands: Idle/Sleep
+ * @ingroup cli
+ * The Sleep plugin contributes several commands to the application framework's
+ * CLI.  These commands are used to control the idling and sleeping behavior of
+ * the device.
+ * 
+ * @{
+ */
+
+/** @} */ // end group plugin-idle-sleep
 
 /** @addtogroup plugin-ota-bootload Plugin Commands: OTA Bootload
  * @ingroup cli

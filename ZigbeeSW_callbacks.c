@@ -5,7 +5,7 @@
 // previous version will be overwritten and any code you have added will be
 // lost.
 
-#include "Device.h"
+#include "device.h"
 #include "app/framework/include/af.h"
 #include "AppEvent.h"
 #include "Uart_Receiver.h"

@@ -1303,12 +1303,12 @@
           <state>PHY_RAIL</state>
           <state>EFR32MG1P</state>
           <state>EFR32MG1P132F256GM48</state>
-          <state>ATTRIBUTE_STORAGE_CONFIGURATION="app/builder/ZigbeeSW/ZigbeeSW_endpoint_config.h"</state>
+          <state>ATTRIBUTE_STORAGE_CONFIGURATION="app/builder/ZigbeeSW/SW1_config/ZigbeeSW_endpoint_config.h"</state>
           <state>BOARD_HEADER="app/builder/ZigbeeSW/ZigbeeSW_board.h"</state>
           <state>CONFIGURATION_HEADER="app/framework/util/config.h"</state>
           <state>GENERATED_TOKEN_HEADER="app/builder/ZigbeeSW/ZigbeeSW_tokens.h"</state>
           <state>PLATFORM_HEADER="platform/base/hal/micro/cortexm3/compiler/iar.h"</state>
-          <state>ZA_GENERATED_HEADER="app/builder/ZigbeeSW/ZigbeeSW.h"</state>
+          <state>ZA_GENERATED_HEADER="app/builder/ZigbeeSW/SW1_config/ZigbeeSW.h"</state>
           <state>__SOURCEFILE__="$FILE_FNAME$"</state>
           <state>BOARD_BRD4300B</state>
           <state>SWITCH_1_BUTTON_V2</state>
@@ -1865,7 +1865,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>ZigbeeSW.s37</state>
+          <state>SW1.s37</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -1920,7 +1920,7 @@
         </option>
         <option>
           <name>IlinkOutputFile</name>
-          <state>ZigbeeSW.out</state>
+          <state>SW1.out</state>
         </option>
         <option>
           <name>IlinkDebugInfoEnable</name>
@@ -5751,15 +5751,15 @@
           <state>PHY_RAIL</state>
           <state>EFR32MG1P</state>
           <state>EFR32MG1P132F256GM48</state>
-          <state>ATTRIBUTE_STORAGE_CONFIGURATION="app/builder/ZigbeeSW/ZigbeeSW_endpoint_config.h"</state>
+          <state>ATTRIBUTE_STORAGE_CONFIGURATION="app/builder/ZigbeeSW/DZ1_config/ZigbeeSW_endpoint_config.h"</state>
           <state>BOARD_HEADER="app/builder/ZigbeeSW/ZigbeeSW_board.h"</state>
           <state>CONFIGURATION_HEADER="app/framework/util/config.h"</state>
           <state>GENERATED_TOKEN_HEADER="app/builder/ZigbeeSW/ZigbeeSW_tokens.h"</state>
           <state>PLATFORM_HEADER="platform/base/hal/micro/cortexm3/compiler/iar.h"</state>
-          <state>ZA_GENERATED_HEADER="app/builder/ZigbeeSW/ZigbeeSW.h"</state>
+          <state>ZA_GENERATED_HEADER="app/builder/ZigbeeSW/DZ1_config/ZigbeeSW.h"</state>
           <state>__SOURCEFILE__="$FILE_FNAME$"</state>
           <state>BOARD_BRD4300B</state>
-          <state>SWITCH_1_BUTTON_V2</state>
+          <state>DIMMER</state>
           <state>EMBER_AF_API_EMBER_TYPES="stack/include/ember-types.h"</state>
           <state>EMBER_AF_API_DEBUG_PRINT="app/framework/util/print.h"</state>
           <state>EMBER_AF_API_AF_HEADER="app/framework/include/af.h"</state>
@@ -5939,7 +5939,7 @@
           <state>$PROJ_DIR$\CommonLed</state>
           <state>$PROJ_DIR$\CommonButton</state>
           <state>$PROJ_DIR$\Com</state>
-          <state>$PROJ_DIR$\SW1_config</state>
+          <state>$PROJ_DIR$\DZ1_config</state>
           <state>$PROJ_DIR$\..\..\..\platform\radio\rail_lib\protocol\ieee802154</state>
           <state>$PROJ_DIR$\..\..\..\platform\radio\rail_lib\protocol\ble</state>
           <state>$PROJ_DIR$\..\..\..\platform\radio\rail_lib\common</state>
@@ -6313,7 +6313,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>ZigbeeSW.s37</state>
+          <state>DZ1.s37</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -6368,7 +6368,7 @@
         </option>
         <option>
           <name>IlinkOutputFile</name>
-          <state>ZigbeeSW.out</state>
+          <state>DZ1.out</state>
         </option>
         <option>
           <name>IlinkDebugInfoEnable</name>
@@ -11439,6 +11439,18 @@
   </file>
   <file>
     <name>$PROJ_DIR$\..\..\..\platform\base\hal\micro\cortexm3\efm32\led.c</name>
+  </file>
+  <file>
+    <name>$PROJ_DIR$\..\..\..\protocol\zigbee_5.9\app\framework\plugin\level-control\level-control.c</name>
+    <excluded>
+      <configuration>SW4</configuration>
+    </excluded>
+  </file>
+  <file>
+    <name>$PROJ_DIR$\..\..\..\protocol\zigbee_5.9\app\framework\plugin\level-control\level-control.h</name>
+    <excluded>
+      <configuration>SW4</configuration>
+    </excluded>
   </file>
   <file>
     <name>$PROJ_DIR$\..\..\..\protocol\zigbee_5.9\app\util\common\library.c</name>

@@ -808,6 +808,18 @@
 
 /** @} */ // end group identify
 
+/** @addtogroup level-control Cluster Commands: Level Control
+ * @ingroup cli
+ * This group describes the CLI commands for the Level Control cluster. Listed
+ * below is a description of the cluster:<br><br><i> Attributes and commands for
+ * controlling devices that can be set to a level between fully 'On' and fully
+ * 'Off.'</i>
+ * 
+ * @{
+ */
+
+/** @} */ // end group level-control
+
 /** @addtogroup on-off Cluster Commands: On/off
  * @ingroup cli
  * This group describes the CLI commands for the On/off cluster. Listed below is
@@ -1240,6 +1252,80 @@
 #define EMBER_AF_DOXYGEN_CLI_COMMAND_IDENTIFY_TRIGGER
 
 /** @} */ // end group identify
+
+/** @addtogroup level-control Cluster Commands: Level Control
+ * @ingroup cli
+ * This group describes the CLI commands for the Level Control cluster. Listed
+ * below is a description of the cluster:<br><br><i> Attributes and commands for
+ * controlling devices that can be set to a level between fully 'On' and fully
+ * 'Off.'</i>
+ * 
+ * @{
+ */
+
+/** @brief <b>zcl level-control mv-to-level [level:1] [transitionTime:2] </b>
+ *   - <i>Command description for MoveToLevel</i>
+ *     - level - INT8U
+ *     - transitionTime - INT16U
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_LEVEL_CONTROL_MV_TO_LEVEL
+
+/** @brief <b>zcl level-control move [moveMode:1] [rate:1] </b>
+ *   - <i>Command description for Move</i>
+ *     - moveMode - MoveMode [ENUM8]
+ *     - rate - INT8U
+ * @sa 
+ * EmberAfMoveMode
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_LEVEL_CONTROL_MOVE
+
+/** @brief <b>zcl level-control step [stepMode:1] [stepSize:1] [transitionTime:2] </b>
+ *   - <i>Command description for Step</i>
+ *     - stepMode - StepMode [ENUM8]
+ *     - stepSize - INT8U
+ *     - transitionTime - INT16U
+ * @sa 
+ * EmberAfStepMode
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_LEVEL_CONTROL_STEP
+
+/** @brief <b>zcl level-control stop </b>
+ *   - <i>Command description for Stop</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_LEVEL_CONTROL_STOP
+
+/** @brief <b>zcl level-control o-mv-to-level [level:1] [transitionTime:2] </b>
+ *   - <i>Command description for MoveToLevelWithOnOff</i>
+ *     - level - INT8U
+ *     - transitionTime - INT16U
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_LEVEL_CONTROL_O_MV_TO_LEVEL
+
+/** @brief <b>zcl level-control o-move [moveMode:1] [rate:1] </b>
+ *   - <i>Command description for MoveWithOnOff</i>
+ *     - moveMode - MoveMode [ENUM8]
+ *     - rate - INT8U
+ * @sa 
+ * EmberAfMoveMode
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_LEVEL_CONTROL_O_MOVE
+
+/** @brief <b>zcl level-control o-step [stepMode:1] [stepSize:1] [transitionTime:2] </b>
+ *   - <i>Command description for StepWithOnOff</i>
+ *     - stepMode - StepMode [ENUM8]
+ *     - stepSize - INT8U
+ *     - transitionTime - INT16U
+ * @sa 
+ * EmberAfStepMode
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_LEVEL_CONTROL_O_STEP
+
+/** @brief <b>zcl level-control o-stop </b>
+ *   - <i>Command description for StopWithOnOff</i>
+ */
+#define EMBER_AF_DOXYGEN_CLI_COMMAND_LEVEL_CONTROL_O_STOP
+
+/** @} */ // end group level-control
 
 /** @addtogroup on-off Cluster Commands: On/off
  * @ingroup cli

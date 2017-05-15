@@ -46,25 +46,44 @@ boolean emberAfPreZDOMessageReceivedCallback(EmberNodeId emberNodeId,
     }
     return FALSE;
 }
-
+#if 0
 void SendGlobalServerToClientReadAttributeResponse(int8u Endpoint,
         EmberAfClusterId clusterId, EmberAfAttributeId attributeId,
         int8u* value, int8u dataType) {
-    EmberAttributeResponse_str AttributeResponse;
-    unsigned int AttributeResponseLength;
-    AttributeResponse.AttributeID = attributeId;  // on-off
-    AttributeResponse.Status = 0x00;   // success
-    AttributeResponse.DataType = dataType; //bool
-    memcpy(AttributeResponse.Value, value, emberAfGetDataSize(dataType));
-    AttributeResponseLength = sizeof(AttributeResponse.AttributeID)
-            + sizeof(AttributeResponse.Status)
-            + sizeof(AttributeResponse.DataType) + emberAfGetDataSize(dataType);
+    EmberReadAttributeResponse_str AttributeReadResponse;
+    unsigned int AttributeReadResponseLength;
+    AttributeReadResponse.AttributeID = attributeId;  // on-off
+    AttributeReadResponse.Status = 0x00;   // success
+    AttributeReadResponse.DataType = dataType; //bool
+    memcpy(AttributeReadResponse.Value, value, emberAfGetDataSize(dataType));
+    AttributeReadResponseLength = sizeof(AttributeReadResponse.AttributeID)
+            + sizeof(AttributeReadResponse.Status)
+            + sizeof(AttributeReadResponse.DataType) + emberAfGetDataSize(dataType);
 
     emberAfFillCommandGlobalServerToClientReadAttributesResponse(clusterId,
-            &AttributeResponse, AttributeResponseLength);
+            &AttributeReadResponse, AttributeReadResponseLength);
     emberAfSetCommandEndpoints(Endpoint, HcDefaultEPt);
     emberAfSendCommandUnicast(EMBER_OUTGOING_DIRECT, 0x0000);
 }
+#else
+
+void SendGlobalServerToClientReportAttributeResponse(int8u Endpoint,
+        EmberAfClusterId clusterId, EmberAfAttributeId attributeId,
+        int8u* value, int8u dataType) {
+    EmberReportAttributeResponse_str AttributeReportResponse;
+    unsigned int AttributeReportResponseLength;
+    AttributeReportResponse.AttributeID = attributeId;  // on-off
+    AttributeReportResponse.DataType = dataType; //bool
+    memcpy(AttributeReportResponse.Value, value, emberAfGetDataSize(dataType));
+    AttributeReportResponseLength = sizeof(AttributeReportResponse.AttributeID)
+            + sizeof(AttributeReportResponse.DataType) + emberAfGetDataSize(dataType);
+
+    emberAfFillCommandGlobalServerToClientReportAttributes(clusterId,
+            &AttributeReportResponse, AttributeReportResponseLength);
+    emberAfSetCommandEndpoints(Endpoint, HcDefaultEPt);
+    emberAfSendCommandUnicast(EMBER_OUTGOING_DIRECT, 0x0000);
+}
+#endif
 
 void SendViaBindingTable(int8u endpoint, EmberAfClusterId clusterId,
         EmberAfAttributeId attributeId, int8u* value, int8u dataType) {
@@ -110,19 +129,19 @@ void GetHcActiveEndPoint(void) {
 }
 
 void SendBasicReadModelAttributeResponse(void){
-        EmberAttributeResponse_str AttributeResponse;
-    unsigned int AttributeResponseLength;
+        EmberReadAttributeResponse_str AttributeReadResponse;
+    unsigned int AttributeReadResponseLength;
     uint8_t value[64] = {ModelId};
-    AttributeResponse.AttributeID = ZCL_MODEL_IDENTIFIER_ATTRIBUTE_ID;  // on-off
-    AttributeResponse.Status = 0x00;   // success
-    AttributeResponse.DataType = ZCL_CHAR_STRING_ATTRIBUTE_TYPE; //bool
-    memcpy(AttributeResponse.Value, value, ModelLength);
-    AttributeResponseLength = sizeof(AttributeResponse.AttributeID)
-            + sizeof(AttributeResponse.Status)
-            + sizeof(AttributeResponse.DataType) + ModelLength;
+    AttributeReadResponse.AttributeID = ZCL_MODEL_IDENTIFIER_ATTRIBUTE_ID;  // on-off
+    AttributeReadResponse.Status = 0x00;   // success
+    AttributeReadResponse.DataType = ZCL_CHAR_STRING_ATTRIBUTE_TYPE; //bool
+    memcpy(AttributeReadResponse.Value, value, ModelLength);
+    AttributeReadResponseLength = sizeof(AttributeReadResponse.AttributeID)
+            + sizeof(AttributeReadResponse.Status)
+            + sizeof(AttributeReadResponse.DataType) + ModelLength;
 
     emberAfFillCommandGlobalServerToClientReadAttributesResponse(ZCL_BASIC_CLUSTER_ID,
-            &AttributeResponse, AttributeResponseLength);
+            &AttributeReadResponse, AttributeReadResponseLength);
     emberAfSetCommandEndpoints(1, HcDefaultEPt);
     emberAfSendCommandUnicast(EMBER_OUTGOING_DIRECT, 0x0000);
 }

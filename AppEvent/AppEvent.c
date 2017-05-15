@@ -103,7 +103,7 @@ void NwkJoinEventFunction(void) {
     }
     else if (NetworkStatus == EMBER_JOINED_NETWORK) {
         //if the first join to network, device must be read network infomation
-//        GetHcActiveEndPoint();
+        GetHcActiveEndPoint();
         emberEventControlSetInactive(NwkJoinEventControl);
         // neu vao mang, gui trang thai theo chu ki 4 phut 1 lan   
         emberEventControlSetInactive(SendDeviceStatusEventControl);

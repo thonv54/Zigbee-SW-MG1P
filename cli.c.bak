@@ -43,7 +43,9 @@ void emAfPluginScenesServerPrintInfo(void);
 void emAfSendImageBlockRequestTest(void);
 void emberAfPluginEzModeCommissioningClientCommand(void);
 void emberAfPluginEzModeCommissioningServerCommand(void);
-void emberAfPluginFindAndBindTargetStartCommand(void);
+void emberAfPluginIdleSleepAwakeWhenNotJoinedCommand(void);
+void emberAfPluginIdleSleepStatusCommand(void);
+void emberAfPluginIdleSleepStayAwakeCommand(void);
 void emberAfPrintAllOff(void);
 void emberAfPrintAllOn(void);
 void emberAfPrintAttributeTable(void);
@@ -674,6 +676,23 @@ EmberCommandEntry emberCommandTablePluginOtaBootloadCommands[] = {
   emberCommandEntryTerminator()
 };
 
+PGM_P PGM emberCommandTablePluginIdleSleepAwakeWhenNotJoinedCommandArguments[] = {
+  "The value indicating whether the device should stay awake when not joi ...",
+  NULL
+};
+
+PGM_P PGM emberCommandTablePluginIdleSleepForceAwakeCommandArguments[] = {
+  "The value indicating whether the device should stay awake.",
+  NULL
+};
+
+EmberCommandEntry emberCommandTablePluginIdleSleepCommands[] = {
+  emberCommandEntryActionWithDetails("awake-when-not-joined", emberAfPluginIdleSleepAwakeWhenNotJoinedCommand, "u", "Sets whether the device stays awake when not joined to a ZigBee networ ...", emberCommandTablePluginIdleSleepAwakeWhenNotJoinedCommandArguments),
+  emberCommandEntryActionWithDetails("force-awake", emberAfPluginIdleSleepStayAwakeCommand, "u", "Sets whether the device is forced to stay awake.", emberCommandTablePluginIdleSleepForceAwakeCommandArguments),
+  emberCommandEntryActionWithDetails("status", emberAfPluginIdleSleepStatusCommand, "", "Display the status of the sleeping behavior.", NULL),
+  emberCommandEntryTerminator()
+};
+
 EmberCommandEntry emberCommandTablePluginIdentifyCommands[] = {
   emberCommandEntryActionWithDetails("print", emAfPluginIdentifyCliPrint, "", "Print which endpoints are reporting.", NULL),
   emberCommandEntryTerminator()
@@ -682,16 +701,6 @@ EmberCommandEntry emberCommandTablePluginIdentifyCommands[] = {
 EmberCommandEntry emberCommandTablePluginGroupsServerCommands[] = {
   emberCommandEntryActionWithDetails("clear", emAfGroupsServerCliClear, "", "Clear the groups table on every endpoint.", NULL),
   emberCommandEntryActionWithDetails("print", emAfGroupsServerCliPrint, "", "Print information about the contents of the groups table.", NULL),
-  emberCommandEntryTerminator()
-};
-
-PGM_P PGM emberCommandTablePluginFindAndBindTargetCommandArguments[] = {
-  "The endpoint on which to begin the Finding and Binding target process.",
-  NULL
-};
-
-EmberCommandEntry emberCommandTablePluginFindAndBindCommands[] = {
-  emberCommandEntryActionWithDetails("target", emberAfPluginFindAndBindTargetStartCommand, "u", "Makes this node start identifying as a target for binding with an init ...", emberCommandTablePluginFindAndBindTargetCommandArguments),
   emberCommandEntryTerminator()
 };
 
@@ -730,9 +739,9 @@ EmberCommandEntry emberCommandTablePluginEepromCommands[] = {
 EmberCommandEntry emberCommandTablePluginCommands[] = {
   emberCommandEntrySubMenu("eeprom", emberCommandTablePluginEepromCommands, ""),
   emberCommandEntrySubMenu("ezmode-commissioning", emberCommandTablePluginEzmodeCommissioningCommands, ""),
-  emberCommandEntrySubMenu("find-and-bind", emberCommandTablePluginFindAndBindCommands, ""),
   emberCommandEntrySubMenu("groups-server", emberCommandTablePluginGroupsServerCommands, ""),
   emberCommandEntrySubMenu("identify", emberCommandTablePluginIdentifyCommands, ""),
+  emberCommandEntrySubMenu("idle-sleep", emberCommandTablePluginIdleSleepCommands, ""),
   emberCommandEntrySubMenu("ota-bootload", emberCommandTablePluginOtaBootloadCommands, ""),
   emberCommandEntrySubMenu("ota-client", emberCommandTablePluginOtaClientCommands, ""),
   emberCommandEntrySubMenu("ota-storage-common", emberCommandTablePluginOtaStorageCommonCommands, ""),
