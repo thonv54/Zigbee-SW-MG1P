@@ -3200,7 +3200,6 @@ EmberAfStatus emberAfScenesClusterStoreCurrentSceneCallback(uint8_t endpoint,
 
 /** @name On/off Cluster Callbacks */
 // @{
-
 /** @brief On/off Cluster Level Control Effect
  *
  * This is called by the framework when the on/off cluster initiates a command

@@ -784,20 +784,6 @@ bool emberAfKeyEstablishmentCallback(EmberAfKeyEstablishmentNotifyMessage status
   return true;
 }
 
-/** @brief On/off Cluster Level Control Effect
- *
- * This is called by the framework when the on/off cluster initiates a command
- * that must effect a level control change. The implementation assumes that the
- * client will handle any effect on the On/Off Cluster.
- *
- * @param endpoint   Ver.: always
- * @param newValue   Ver.: always
- */
-void emberAfOnOffClusterLevelControlEffectCallback(uint8_t endpoint,
-                                                   bool newValue)
-{
-}
-
 /** @brief Main Start
  *
  * This function is called at the start of main after the HAL has been

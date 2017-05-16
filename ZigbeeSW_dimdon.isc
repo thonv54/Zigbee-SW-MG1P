@@ -600,7 +600,7 @@ appPlugin:interpan,false
 
 appPlugin:key-establishment,false
 
-appPlugin:level-control,false
+appPlugin:level-control,true
 
 appPlugin:messaging-client,false
 

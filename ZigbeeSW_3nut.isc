@@ -610,7 +610,7 @@ appPlugin:network-find,true
 
 appPlugin:network-steering,false
 
-appPlugin:on-off,true
+appPlugin:on-off,false
 
 appPlugin:ota-bootload,true
 

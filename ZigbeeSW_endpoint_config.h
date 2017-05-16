@@ -15,14 +15,14 @@
 #if BIGENDIAN_CPU
 #define GENERATED_DEFAULTS { \
 4,'L','u','m','i',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 0,Default value: Basic,manufacturer name */, \
-6,'L','M','-','D','Z','1',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 33,Default value: Basic,model identifier */, \
+6,'L','M','-','F','Z','1',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 33,Default value: Basic,model identifier */, \
 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF /* 66,Default value: Over the Air Bootloading,OTA Upgrade Server ID */, \
 0xFF, 0xFF, 0xFF, 0xFF /* 74,Default value: Over the Air Bootloading,Offset (address) into the file */, \
   }
 #else // ! BIGENDIAN_CPU
 #define GENERATED_DEFAULTS { \
 4,'L','u','m','i',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 0,Default value: Basic,manufacturer name */, \
-6,'L','M','-','D','Z','1',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 33,Default value: Basic,model identifier */, \
+6,'L','M','-','F','Z','1',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 /* 33,Default value: Basic,model identifier */, \
 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF /* 66,Default value: Over the Air Bootloading,OTA Upgrade Server ID */, \
 0xFF, 0xFF, 0xFF, 0xFF /* 74,Default value: Over the Air Bootloading,Offset (address) into the file */, \
   }
@@ -151,14 +151,13 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
     { 0x0003, (EmberAfAttributeMetadata*)&(generatedAttributes[8]), 0, 0, (CLUSTER_MASK_CLIENT), NULL,  },    \
     { 0x0003, (EmberAfAttributeMetadata*)&(generatedAttributes[8]), 2, 4, (CLUSTER_MASK_SERVER| CLUSTER_MASK_INIT_FUNCTION| CLUSTER_MASK_ATTRIBUTE_CHANGED_FUNCTION), emberAfFuncArrayIdentifyClusterServer, },    \
     { 0x0006, (EmberAfAttributeMetadata*)&(generatedAttributes[18]), 0, 0, (CLUSTER_MASK_CLIENT), NULL,  },    \
-    { 0x0008, (EmberAfAttributeMetadata*)&(generatedAttributes[20]), 0, 0, (CLUSTER_MASK_CLIENT), NULL,  },    \
   }
 
 
 // Endpoint types
 #define GENERATED_ENDPOINT_TYPES {        \
     { (EmberAfCluster*)&(generatedClusters[0]), 7, 35 }, \
-    { (EmberAfCluster*)&(generatedClusters[7]), 5, 4 }, \
+    { (EmberAfCluster*)&(generatedClusters[7]), 4, 4 }, \
   }
 
 
@@ -205,7 +204,7 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
 #define FIXED_PROFILE_IDS { 260, 260 }
 
 // Array of profile ids
-#define FIXED_DEVICE_IDS { 257, 260 }
+#define FIXED_DEVICE_IDS { 257, 259 }
 
 // Array of profile ids
 #define FIXED_DEVICE_VERSIONS { 0, 0 }
@@ -330,17 +329,17 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
 
 
 #define EMBER_AF_GENERATED_PLUGIN_STACK_STATUS_FUNCTION_DECLARATIONS \
+  void emberAfPluginLevelControlStackStatusCallback(EmberStatus status); \
   void emberAfPluginNetworkFindStackStatusCallback(EmberStatus status); \
   void emberAfPluginOnOffStackStatusCallback(EmberStatus status); \
   void emberAfPluginOtaClientStackStatusCallback(EmberStatus status); \
-  void emberAfPluginLevelControlStackStatusCallback(EmberStatus status); \
 
 
 #define EMBER_AF_GENERATED_PLUGIN_STACK_STATUS_FUNCTION_CALLS \
+  emberAfPluginLevelControlStackStatusCallback(status); \
   emberAfPluginNetworkFindStackStatusCallback(status); \
   emberAfPluginOnOffStackStatusCallback(status); \
   emberAfPluginOtaClientStackStatusCallback(status); \
-  emberAfPluginLevelControlStackStatusCallback(status); \
 
 
 // Generated data for the command discovery
@@ -374,14 +373,14 @@ PGM EmberAfGenericClusterFunction emberAfFuncArrayOtaBootloadClusterClient[] = {
     { 0x0006, 0x00, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* On/off / Off */ \
     { 0x0006, 0x01, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* On/off / On */ \
     { 0x0006, 0x02, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* On/off / Toggle */ \
-    { 0x0008, 0x00, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* Level Control / MoveToLevel */ \
-    { 0x0008, 0x01, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* Level Control / Move */ \
-    { 0x0008, 0x02, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* Level Control / Step */ \
-    { 0x0008, 0x03, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* Level Control / Stop */ \
-    { 0x0008, 0x04, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* Level Control / MoveToLevelWithOnOff */ \
-    { 0x0008, 0x05, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* Level Control / MoveWithOnOff */ \
-    { 0x0008, 0x06, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* Level Control / StepWithOnOff */ \
-    { 0x0008, 0x07, COMMAND_MASK_OUTGOING_CLIENT | COMMAND_MASK_INCOMING_SERVER }, /* Level Control / StopWithOnOff */ \
+    { 0x0008, 0x00, COMMAND_MASK_INCOMING_SERVER }, /* Level Control / MoveToLevel */ \
+    { 0x0008, 0x01, COMMAND_MASK_INCOMING_SERVER }, /* Level Control / Move */ \
+    { 0x0008, 0x02, COMMAND_MASK_INCOMING_SERVER }, /* Level Control / Step */ \
+    { 0x0008, 0x03, COMMAND_MASK_INCOMING_SERVER }, /* Level Control / Stop */ \
+    { 0x0008, 0x04, COMMAND_MASK_INCOMING_SERVER }, /* Level Control / MoveToLevelWithOnOff */ \
+    { 0x0008, 0x05, COMMAND_MASK_INCOMING_SERVER }, /* Level Control / MoveWithOnOff */ \
+    { 0x0008, 0x06, COMMAND_MASK_INCOMING_SERVER }, /* Level Control / StepWithOnOff */ \
+    { 0x0008, 0x07, COMMAND_MASK_INCOMING_SERVER }, /* Level Control / StopWithOnOff */ \
     { 0x0019, 0x01, COMMAND_MASK_OUTGOING_CLIENT }, /* Over the Air Bootloading / QueryNextImageRequest */ \
     { 0x0019, 0x03, COMMAND_MASK_OUTGOING_CLIENT }, /* Over the Air Bootloading / ImageBlockRequest */ \
     { 0x0019, 0x06, COMMAND_MASK_OUTGOING_CLIENT }, /* Over the Air Bootloading / UpgradeEndRequest */ \
