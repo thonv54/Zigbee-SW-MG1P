@@ -46,7 +46,7 @@ boolean emberAfPreZDOMessageReceivedCallback(EmberNodeId emberNodeId,
     }
     return FALSE;
 }
-#if 0
+#if 1
 void SendGlobalServerToClientReadAttributeResponse(int8u Endpoint,
         EmberAfClusterId clusterId, EmberAfAttributeId attributeId,
         int8u* value, int8u dataType) {

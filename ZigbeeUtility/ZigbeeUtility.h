@@ -47,7 +47,7 @@ void SendViaBindingTable(int8u endpoint,
                            int8u* value,
                            int8u dataType);
 
-#if 0
+#if 1
 void SendGlobalServerToClientReadAttributeResponse(int8u Endpoint, 
 						   EmberAfClusterId clusterId,
 						   EmberAfAttributeId attributeId,
